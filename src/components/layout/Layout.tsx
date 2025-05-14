@@ -25,16 +25,20 @@ const Layout = () => {
         <Header />
         
         {isAdmin && (
-          <Sidebar className="hidden md:flex top-16 h-[calc(100vh-4rem)]" variant="sidebar" side="left">
+          <Sidebar 
+            className="hidden md:flex top-16 h-[calc(100vh-4rem)] glass-morphism dark:glass-morphism-dark border-r border-white/10" 
+            variant="sidebar" 
+            side="left"
+          >
             <div className="flex items-center justify-end p-2">
-              <SidebarTrigger />
+              <SidebarTrigger className="text-brand-navy dark:text-brand-blue hover:bg-brand-navy/10 dark:hover:bg-brand-blue/20" />
             </div>
             <AdminSidebar />
           </Sidebar>
         )}
         
         <SidebarInset>
-          <main className="flex-grow pb-16">
+          <main className="flex-grow pb-16 bg-gradient-to-b from-transparent to-brand-light/30 dark:to-brand-navy/10">
             <div className="container py-8">
               {isLoading ? (
                 <div className="w-full h-64 flex items-center justify-center">
