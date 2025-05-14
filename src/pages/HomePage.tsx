@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import PollList from "@/components/polls/PollList";
 import { Button } from "@/components/ui/button";
-import { Tab, Tabs, TabList, TabPanel } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { PlusCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -33,14 +33,14 @@ const HomePage = () => {
       </div>
 
       <Tabs defaultValue="active" className="w-full">
-        <TabList className="grid w-full grid-cols-2">
-          <Tab value="active">Active Polls</Tab>
-          <Tab value="my">My Polls</Tab>
-        </TabList>
-        <TabPanel value="active" className="mt-6">
+        <TabsList className="grid w-full grid-cols-2">
+          <TabsTrigger value="active">Active Polls</TabsTrigger>
+          <TabsTrigger value="my">My Polls</TabsTrigger>
+        </TabsList>
+        <TabsContent value="active" className="mt-6">
           <PollList />
-        </TabPanel>
-        <TabPanel value="my" className="mt-6">
+        </TabsContent>
+        <TabsContent value="my" className="mt-6">
           {isAuthenticated ? (
             <PollList />
           ) : (
@@ -56,7 +56,7 @@ const HomePage = () => {
               </Button>
             </div>
           )}
-        </TabPanel>
+        </TabsContent>
       </Tabs>
     </div>
   );
