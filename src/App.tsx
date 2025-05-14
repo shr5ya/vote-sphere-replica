@@ -14,6 +14,10 @@ import CreatePollPage from "@/pages/CreatePollPage";
 import PollDetailPage from "@/pages/PollDetailPage";
 import NotFound from "./pages/NotFound";
 import Index from "./pages/Index";
+import DashboardPage from "./pages/DashboardPage";
+import AdminDashboardPage from "./pages/admin/AdminDashboardPage";
+import AdminElectionsPage from "./pages/admin/AdminElectionsPage";
+import AdminUsersPage from "./pages/admin/AdminUsersPage";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +36,12 @@ const App = () => (
                   <Route path="/elections" element={<HomePage />} />
                   <Route path="/create" element={<CreatePollPage />} />
                   <Route path="/polls/:pollId" element={<PollDetailPage />} />
+                  <Route path="/dashboard" element={<DashboardPage />} />
+                  
+                  {/* Admin Routes */}
+                  <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
+                  <Route path="/admin/elections" element={<AdminElectionsPage />} />
+                  <Route path="/admin/users" element={<AdminUsersPage />} />
                 </Route>
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="*" element={<NotFound />} />

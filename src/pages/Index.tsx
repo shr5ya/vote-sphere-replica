@@ -18,7 +18,7 @@ const Index = () => {
       <div className={`flex flex-1 flex-col items-center justify-center text-center px-4 py-16 md:py-24 ${mounted ? 'animate-fade-in' : 'opacity-0'}`}>
         <div className="flex items-center gap-2 mb-6">
           <Check className="h-10 w-10 text-brand-blue" />
-          <h1 className="text-4xl font-extrabold">Electra</h1>
+          <h1 className="text-4xl font-extrabold bg-gradient-to-r from-brand-blue to-brand-blue-light bg-clip-text text-transparent">Electra</h1>
         </div>
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold max-w-3xl">
           Secure, Transparent, Democratic Elections
@@ -35,7 +35,7 @@ const Index = () => {
             Get Started
           </Button>
           <Button
-            onClick={() => navigate("/")} 
+            onClick={() => navigate("/elections")} 
             variant="outline"
             className="text-lg px-8 py-6 h-auto"
           >
@@ -101,7 +101,7 @@ const Index = () => {
           
           <div className="mt-12 text-center">
             <Button 
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/elections")}
               className="bg-brand-blue hover:bg-brand-blue-light animate-fade-in"
               style={{animationDelay: '0.7s'}}
             >

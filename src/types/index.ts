@@ -3,6 +3,7 @@ export interface User {
   id: string;
   name: string;
   email: string;
+  role?: 'admin' | 'user';
 }
 
 export interface Poll {
@@ -27,4 +28,19 @@ export interface Vote {
   pollId: string;
   optionId: string;
   timestamp: Date;
+}
+
+export interface DashboardStats {
+  totalUsers: number;
+  totalElections: number;
+  activeElections: number;
+  completedElections: number;
+  totalVotes: number;
+}
+
+export interface UserStats {
+  recentActivity: {
+    date: string;
+    action: string;
+  }[];
 }

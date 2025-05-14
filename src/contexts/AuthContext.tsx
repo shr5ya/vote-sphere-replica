@@ -6,6 +6,7 @@ import { toast } from '@/components/ui/sonner';
 interface AuthContextType {
   currentUser: User | null;
   isAuthenticated: boolean;
+  isAdmin: boolean;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
   register: (name: string, email: string, password: string) => Promise<void>;
@@ -18,8 +19,15 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 const DEMO_USERS: User[] = [
   {
     id: '1',
-    name: 'Demo User',
-    email: 'demo@example.com',
+    name: 'Admin User',
+    email: 'admin@example.com',
+    role: 'admin',
+  },
+  {
+    id: '2',
+    name: 'Regular User',
+    email: 'user@example.com',
+    role: 'user',
   },
 ];
 
@@ -54,7 +62,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         const newUser: User = {
           id: Date.now().toString(),
           name: email.split('@')[0],
-          email
+          email,
+          role: 'user',
         };
         setCurrentUser(newUser);
         localStorage.setItem('currentUser', JSON.stringify(newUser));
@@ -77,7 +86,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const newUser: User = {
         id: Date.now().toString(),
         name,
-        email
+        email,
+        role: 'user',
       };
       
       setCurrentUser(newUser);
@@ -101,7 +111,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     <AuthContext.Provider 
       value={{ 
         currentUser, 
-        isAuthenticated: !!currentUser, 
+        isAuthenticated: !!currentUser,
+        isAdmin: currentUser?.role === 'admin',
         isLoading,
         login, 
         register,

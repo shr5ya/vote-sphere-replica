@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { InfoIcon } from "lucide-react";
 
 interface LoginFormProps {
   onToggleForm: () => void;
@@ -61,6 +63,13 @@ const LoginForm = ({ onToggleForm }: LoginFormProps) => {
               required
             />
           </div>
+          <Alert className="bg-muted/50 border-muted">
+            <InfoIcon className="h-4 w-4" />
+            <AlertDescription className="text-xs">
+              For admin access, use <strong>admin@example.com</strong> (any password)<br />
+              For regular user, use <strong>user@example.com</strong> (any password)
+            </AlertDescription>
+          </Alert>
         </CardContent>
         <CardFooter className="flex flex-col space-y-4">
           <Button 
@@ -76,9 +85,6 @@ const LoginForm = ({ onToggleForm }: LoginFormProps) => {
               Sign up
             </Button>
           </p>
-          <div className="text-xs text-gray-500 text-center">
-            <p>For demo purposes, you can use any email and password</p>
-          </div>
         </CardFooter>
       </form>
     </Card>
