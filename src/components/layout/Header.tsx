@@ -2,30 +2,33 @@
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
-import { CheckCheck, User, LogOut } from "lucide-react";
+import { Check, User, LogOut } from "lucide-react";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 const Header = () => {
   const { currentUser, isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur animate-slide-in">
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-2">
           <Link to="/" className="flex items-center gap-2">
-            <CheckCheck className="h-6 w-6 text-brand-blue" />
-            <span className="text-xl font-bold">VoteHub</span>
+            <Check className="h-6 w-6 text-brand-blue" />
+            <span className="text-xl font-bold">Electra</span>
           </Link>
         </div>
         <nav className="hidden md:flex items-center gap-5">
-          <Link to="/" className="text-sm font-medium hover:text-brand-blue transition-colors">
-            Home
+          <Link to="/elections" className="text-sm font-medium hover:text-brand-blue transition-colors">
+            Elections
           </Link>
           <Link to="/create" className="text-sm font-medium hover:text-brand-blue transition-colors">
-            Create Poll
+            Create Election
           </Link>
         </nav>
         <div className="flex items-center gap-4">
+          <ThemeToggle />
+          
           {isAuthenticated ? (
             <div className="flex items-center gap-4">
               <div className="hidden md:flex items-center gap-2">

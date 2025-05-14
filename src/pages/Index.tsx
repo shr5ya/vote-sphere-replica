@@ -1,25 +1,31 @@
 
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { CheckCheck } from "lucide-react";
+import { Check } from "lucide-react";
 
 const Index = () => {
   const navigate = useNavigate();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col">
       {/* Hero Section */}
-      <div className="flex flex-1 flex-col items-center justify-center text-center px-4 py-16 md:py-24">
+      <div className={`flex flex-1 flex-col items-center justify-center text-center px-4 py-16 md:py-24 ${mounted ? 'animate-fade-in' : 'opacity-0'}`}>
         <div className="flex items-center gap-2 mb-6">
-          <CheckCheck className="h-10 w-10 text-brand-blue" />
-          <h1 className="text-4xl font-extrabold">VoteHub</h1>
+          <Check className="h-10 w-10 text-brand-blue" />
+          <h1 className="text-4xl font-extrabold">Electra</h1>
         </div>
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold max-w-3xl">
-          Create, Share, and Analyze Polls in Minutes
+          Secure, Transparent, Democratic Elections
         </h2>
         <p className="mt-6 text-lg text-muted-foreground max-w-2xl">
-          The simple, powerful way to gather opinions and make decisions through online voting.
-          Start creating your own polls today!
+          The modern platform for conducting fair and accessible elections. 
+          Create ballots, monitor results, and ensure every voice is heard.
         </p>
         <div className="mt-10 flex flex-wrap gap-4 justify-center">
           <Button 
@@ -33,51 +39,73 @@ const Index = () => {
             variant="outline"
             className="text-lg px-8 py-6 h-auto"
           >
-            Browse Polls
+            Browse Elections
           </Button>
         </div>
       </div>
 
       {/* Features Section */}
-      <div className="bg-gray-50 py-16">
+      <div className="bg-secondary/30 py-16">
         <div className="container">
-          <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 animate-slide-in">How It Works</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <div className="w-12 h-12 bg-brand-blue text-white rounded-full flex items-center justify-center mb-4">
+            <div className="bg-card p-6 rounded-lg shadow-sm animate-fade-in" style={{animationDelay: '0.1s'}}>
+              <div className="w-12 h-12 bg-brand-blue text-primary-foreground rounded-full flex items-center justify-center mb-4">
                 1
               </div>
-              <h3 className="text-xl font-bold mb-2">Create Your Poll</h3>
+              <h3 className="text-xl font-bold mb-2">Create Your Ballot</h3>
               <p className="text-muted-foreground">
-                Design custom polls with multiple options, descriptions, and more in just a few clicks.
+                Design ballots with candidates, propositions, or other voting options quickly and securely.
               </p>
+              <div className="mt-4 h-40 rounded-md overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1555624435-d04204e640a4?auto=format&fit=crop&q=80&w=500" 
+                  alt="Create ballot" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <div className="w-12 h-12 bg-brand-blue text-white rounded-full flex items-center justify-center mb-4">
+            <div className="bg-card p-6 rounded-lg shadow-sm animate-fade-in" style={{animationDelay: '0.3s'}}>
+              <div className="w-12 h-12 bg-brand-blue text-primary-foreground rounded-full flex items-center justify-center mb-4">
                 2
               </div>
-              <h3 className="text-xl font-bold mb-2">Share With Others</h3>
+              <h3 className="text-xl font-bold mb-2">Secure Voting</h3>
               <p className="text-muted-foreground">
-                Share your poll with friends, colleagues, or the world to start collecting votes.
+                Allow voters to cast their ballots with multiple layers of verification and security.
               </p>
+              <div className="mt-4 h-40 rounded-md overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&q=80&w=500" 
+                  alt="Secure voting" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <div className="w-12 h-12 bg-brand-blue text-white rounded-full flex items-center justify-center mb-4">
+            <div className="bg-card p-6 rounded-lg shadow-sm animate-fade-in" style={{animationDelay: '0.5s'}}>
+              <div className="w-12 h-12 bg-brand-blue text-primary-foreground rounded-full flex items-center justify-center mb-4">
                 3
               </div>
               <h3 className="text-xl font-bold mb-2">Analyze Results</h3>
               <p className="text-muted-foreground">
-                Watch votes come in real-time and analyze the results with beautiful visualizations.
+                View results in real-time with detailed breakdowns and visualizations of the voting data.
               </p>
+              <div className="mt-4 h-40 rounded-md overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=500" 
+                  alt="Analyze results" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
           </div>
           
           <div className="mt-12 text-center">
             <Button 
               onClick={() => navigate("/")}
-              className="bg-brand-blue hover:bg-brand-blue-light"
+              className="bg-brand-blue hover:bg-brand-blue-light animate-fade-in"
+              style={{animationDelay: '0.7s'}}
             >
-              Explore Active Polls
+              Explore Active Elections
             </Button>
           </div>
         </div>

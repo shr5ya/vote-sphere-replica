@@ -6,36 +6,41 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { PollProvider } from "@/contexts/PollContext";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import Layout from "@/components/layout/Layout";
 import HomePage from "@/pages/HomePage";
 import LoginPage from "@/pages/LoginPage";
 import CreatePollPage from "@/pages/CreatePollPage";
 import PollDetailPage from "@/pages/PollDetailPage";
 import NotFound from "./pages/NotFound";
+import Index from "./pages/Index";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <AuthProvider>
-      <PollProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              <Route element={<Layout />}>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/create" element={<CreatePollPage />} />
-                <Route path="/polls/:pollId" element={<PollDetailPage />} />
-              </Route>
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
-      </PollProvider>
-    </AuthProvider>
+    <ThemeProvider defaultTheme="system" storageKey="electra-theme">
+      <AuthProvider>
+        <PollProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route element={<Layout />}>
+                  <Route path="/elections" element={<HomePage />} />
+                  <Route path="/create" element={<CreatePollPage />} />
+                  <Route path="/polls/:pollId" element={<PollDetailPage />} />
+                </Route>
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </TooltipProvider>
+        </PollProvider>
+      </AuthProvider>
+    </ThemeProvider>
   </QueryClientProvider>
 );
 
