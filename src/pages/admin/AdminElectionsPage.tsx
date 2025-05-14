@@ -1,7 +1,8 @@
 
 import ElectionManagement from "@/components/admin/ElectionManagement";
 import { useAuth } from "@/contexts/AuthContext";
-import { useNavigate, useEffect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const AdminElectionsPage = () => {
   const { isAuthenticated, isAdmin } = useAuth();

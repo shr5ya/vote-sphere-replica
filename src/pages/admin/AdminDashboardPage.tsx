@@ -1,7 +1,8 @@
 
 import DashboardAnalytics from "@/components/admin/DashboardAnalytics";
 import { useAuth } from "@/contexts/AuthContext";
-import { useNavigate, useEffect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const AdminDashboardPage = () => {
   const { isAuthenticated, isAdmin } = useAuth();

@@ -1,7 +1,8 @@
 
 import UserDashboard from "@/components/dashboard/UserDashboard";
 import { useAuth } from "@/contexts/AuthContext";
-import { useNavigate, useEffect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const DashboardPage = () => {
   const { isAuthenticated, isAdmin } = useAuth();

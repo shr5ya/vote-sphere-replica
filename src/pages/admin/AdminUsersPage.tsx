@@ -1,7 +1,8 @@
 
 import UserManagement from "@/components/admin/UserManagement";
 import { useAuth } from "@/contexts/AuthContext";
-import { useNavigate, useEffect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const AdminUsersPage = () => {
   const { isAuthenticated, isAdmin } = useAuth();

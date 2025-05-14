@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/sidebar";
 
 const AdminSidebar = () => {
-  const { collapsed } = useSidebar();
+  const sidebar = useSidebar();
   const { isAdmin } = useAuth();
   
   if (!isAdmin) return null;
@@ -40,7 +40,7 @@ const AdminSidebar = () => {
               <SidebarMenuButton asChild>
                 <NavLink to="/admin/dashboard" className={getLinkClass}>
                   <BarChart className="h-4 w-4" />
-                  {!collapsed && <span>Analytics</span>}
+                  {!sidebar.state || sidebar.state === "expanded" && <span>Analytics</span>}
                 </NavLink>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -49,7 +49,7 @@ const AdminSidebar = () => {
               <SidebarMenuButton asChild>
                 <NavLink to="/admin/elections" className={getLinkClass}>
                   <Calendar className="h-4 w-4" />
-                  {!collapsed && <span>Elections</span>}
+                  {!sidebar.state || sidebar.state === "expanded" && <span>Elections</span>}
                 </NavLink>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -58,7 +58,7 @@ const AdminSidebar = () => {
               <SidebarMenuButton asChild>
                 <NavLink to="/admin/users" className={getLinkClass}>
                   <Users className="h-4 w-4" />
-                  {!collapsed && <span>Users</span>}
+                  {!sidebar.state || sidebar.state === "expanded" && <span>Users</span>}
                 </NavLink>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -67,7 +67,7 @@ const AdminSidebar = () => {
               <SidebarMenuButton asChild>
                 <NavLink to="/admin/settings" className={getLinkClass}>
                   <Settings className="h-4 w-4" />
-                  {!collapsed && <span>Settings</span>}
+                  {!sidebar.state || sidebar.state === "expanded" && <span>Settings</span>}
                 </NavLink>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -83,7 +83,7 @@ const AdminSidebar = () => {
               <SidebarMenuButton asChild>
                 <NavLink to="/elections" className={getLinkClass}>
                   <Calendar className="h-4 w-4" />
-                  {!collapsed && <span>Elections</span>}
+                  {!sidebar.state || sidebar.state === "expanded" && <span>Elections</span>}
                 </NavLink>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -92,7 +92,7 @@ const AdminSidebar = () => {
               <SidebarMenuButton asChild>
                 <NavLink to="/profile" className={getLinkClass}>
                   <User className="h-4 w-4" />
-                  {!collapsed && <span>My Profile</span>}
+                  {!sidebar.state || sidebar.state === "expanded" && <span>My Profile</span>}
                 </NavLink>
               </SidebarMenuButton>
             </SidebarMenuItem>
