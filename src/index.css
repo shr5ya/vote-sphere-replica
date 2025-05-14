@@ -14,13 +14,13 @@
     --popover: 0 0% 100%;
     --popover-foreground: 210 64% 21%;
 
-    --primary: 197 75% 76%;
-    --primary-foreground: 196 70% 20%;
+    --primary: 197 75% 56%;
+    --primary-foreground: 210 40% 98%;
 
     --secondary: 39 29% 85%;
     --secondary-foreground: 39 20% 25%;
 
-    --muted: 210 40% 96.1%;
+    --muted: 210 40% 94%;
     --muted-foreground: 210 64% 40%;
 
     --accent: 39 29% 85%;
@@ -31,7 +31,7 @@
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 197 75% 76%;
+    --ring: 197 75% 66%;
 
     --radius: 0.5rem;
     
@@ -86,11 +86,11 @@
 /* Glassmorphism utilities */
 @layer utilities {
   .glass-morphism {
-    @apply bg-white/15 backdrop-blur-md border border-white/20;
+    @apply bg-white/15 backdrop-blur-md border border-white/20 shadow-sm;
   }
   
   .glass-morphism-dark {
-    @apply bg-black/20 backdrop-blur-md border border-white/10;
+    @apply bg-black/20 backdrop-blur-md border border-white/10 shadow-md;
   }
   
   .electra-title {
@@ -150,3 +150,7 @@
   }
 }
 
+/* Add fade-in animation class */
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}

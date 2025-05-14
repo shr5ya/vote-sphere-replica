@@ -17,6 +17,7 @@ import {
 const AdminSidebar = () => {
   const sidebar = useSidebar();
   const { isAdmin } = useAuth();
+  const isCollapsed = sidebar.state === "collapsed";
   
   if (!isAdmin) return null;
   
@@ -33,7 +34,7 @@ const AdminSidebar = () => {
   return (
     <SidebarContent className="glass-morphism dark:glass-morphism-dark bg-brand-light/50 dark:bg-brand-black/50">
       <div className="flex items-center gap-2 p-4 border-b">
-        {(sidebar.state === "expanded" || !sidebar.state) && (
+        {(!isCollapsed || !sidebar.state) && (
           <span className="text-lg font-semibold text-brand-navy dark:text-brand-blue">Admin Panel</span>
         )}
       </div>
@@ -48,7 +49,7 @@ const AdminSidebar = () => {
               <SidebarMenuButton asChild>
                 <NavLink to="/admin/dashboard" className={getLinkClass}>
                   <BarChart className="h-4 w-4 text-brand-navy dark:text-brand-blue" />
-                  {(!sidebar.state || sidebar.state === "expanded") && <span>Analytics</span>}
+                  {(!isCollapsed || !sidebar.state) && <span>Analytics</span>}
                 </NavLink>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -57,7 +58,7 @@ const AdminSidebar = () => {
               <SidebarMenuButton asChild>
                 <NavLink to="/admin/elections" className={getLinkClass}>
                   <Calendar className="h-4 w-4 text-brand-navy dark:text-brand-blue" />
-                  {(!sidebar.state || sidebar.state === "expanded") && <span>Elections</span>}
+                  {(!isCollapsed || !sidebar.state) && <span>Elections</span>}
                 </NavLink>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -66,7 +67,7 @@ const AdminSidebar = () => {
               <SidebarMenuButton asChild>
                 <NavLink to="/create" className={getLinkClass}>
                   <PlusCircle className="h-4 w-4 text-brand-navy dark:text-brand-blue" />
-                  {(!sidebar.state || sidebar.state === "expanded") && <span>Create Election</span>}
+                  {(!isCollapsed || !sidebar.state) && <span>Create Election</span>}
                 </NavLink>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -75,7 +76,7 @@ const AdminSidebar = () => {
               <SidebarMenuButton asChild>
                 <NavLink to="/admin/users" className={getLinkClass}>
                   <Users className="h-4 w-4 text-brand-navy dark:text-brand-blue" />
-                  {(!sidebar.state || sidebar.state === "expanded") && <span>Users</span>}
+                  {(!isCollapsed || !sidebar.state) && <span>Users</span>}
                 </NavLink>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -84,7 +85,7 @@ const AdminSidebar = () => {
               <SidebarMenuButton asChild>
                 <NavLink to="/admin/settings" className={getLinkClass}>
                   <Settings className="h-4 w-4 text-brand-navy dark:text-brand-blue" />
-                  {(!sidebar.state || sidebar.state === "expanded") && <span>Settings</span>}
+                  {(!isCollapsed || !sidebar.state) && <span>Settings</span>}
                 </NavLink>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -102,7 +103,7 @@ const AdminSidebar = () => {
               <SidebarMenuButton asChild>
                 <NavLink to="/elections" className={getLinkClass}>
                   <Calendar className="h-4 w-4 text-brand-navy dark:text-brand-blue" />
-                  {(!sidebar.state || sidebar.state === "expanded") && <span>Elections</span>}
+                  {(!isCollapsed || !sidebar.state) && <span>Elections</span>}
                 </NavLink>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -111,7 +112,7 @@ const AdminSidebar = () => {
               <SidebarMenuButton asChild>
                 <NavLink to="/profile" className={getLinkClass}>
                   <User className="h-4 w-4 text-brand-navy dark:text-brand-blue" />
-                  {(!sidebar.state || sidebar.state === "expanded") && <span>My Profile</span>}
+                  {(!isCollapsed || !sidebar.state) && <span>My Profile</span>}
                 </NavLink>
               </SidebarMenuButton>
             </SidebarMenuItem>

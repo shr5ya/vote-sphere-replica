@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { BarChart, Bar, PieChart, Pie, ResponsiveContainer, Cell, XAxis, YAxis, Tooltip, Legend } from 'recharts';
+import { BarChart, Bar, PieChart, Pie, ResponsiveContainer, Cell, XAxis, YAxis, Tooltip, Legend, LineChart, Line } from 'recharts';
 import { DashboardStats } from '@/types';
 import { useAuth } from '@/contexts/AuthContext';
 
@@ -18,6 +18,15 @@ const mockStatusData = [
   { name: 'Active', value: 5 },
   { name: 'Completed', value: 8 },
   { name: 'Draft', value: 3 },
+];
+
+const mockTimelineData = [
+  { date: 'Jan', votes: 120 },
+  { date: 'Feb', votes: 180 },
+  { date: 'Mar', votes: 250 },
+  { date: 'Apr', votes: 310 },
+  { date: 'May', votes: 420 },
+  { date: 'Jun', votes: 380 },
 ];
 
 const DashboardAnalytics = () => {
@@ -56,51 +65,88 @@ const DashboardAnalytics = () => {
 
   return (
     <div className="space-y-6 animate-fade-in">
-      <h1 className="text-3xl font-bold">Analytics Dashboard</h1>
+      <div className="flex justify-between items-center">
+        <h1 className="text-3xl font-bold">Analytics Dashboard</h1>
+        <div className="text-sm text-muted-foreground">
+          Last updated: May 14, 2025
+        </div>
+      </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <Card className="glass-morphism dark:glass-morphism-dark">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">Total Users</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{stats.totalUsers.toLocaleString()}</div>
+            <div className="text-xs text-muted-foreground mt-1">↑ 12% from last month</div>
           </CardContent>
         </Card>
         
-        <Card>
+        <Card className="glass-morphism dark:glass-morphism-dark">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">Total Elections</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{stats.totalElections}</div>
+            <div className="text-xs text-muted-foreground mt-1">↑ 4 new this month</div>
           </CardContent>
         </Card>
         
-        <Card>
+        <Card className="glass-morphism dark:glass-morphism-dark">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">Active Elections</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{stats.activeElections}</div>
+            <div className="text-xs text-muted-foreground mt-1">3 ending this week</div>
           </CardContent>
         </Card>
         
-        <Card>
+        <Card className="glass-morphism dark:glass-morphism-dark">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">Total Votes</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{stats.totalVotes.toLocaleString()}</div>
+            <div className="text-xs text-muted-foreground mt-1">↑ 23% participation rate</div>
           </CardContent>
         </Card>
       </div>
       
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card className="col-span-1">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <Card className="col-span-1 md:col-span-2 glass-morphism dark:glass-morphism-dark">
+          <CardHeader>
+            <CardTitle>Voting Activity Timeline</CardTitle>
+            <CardDescription>Monthly participation trend</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="h-80">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart
+                  data={mockTimelineData}
+                  margin={{
+                    top: 5,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
+                  }}
+                >
+                  <XAxis dataKey="date" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Line type="monotone" dataKey="votes" stroke="#98D8EF" strokeWidth={2} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card className="glass-morphism dark:glass-morphism-dark">
           <CardHeader>
             <CardTitle>Election Status</CardTitle>
-            <CardDescription>Distribution of election statuses</CardDescription>
+            <CardDescription>Current distribution</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="h-80">
@@ -109,7 +155,7 @@ const DashboardAnalytics = () => {
                   <Pie
                     data={mockStatusData}
                     cx="50%"
-                    cy="50%"
+                    cy="45%"
                     labelLine={false}
                     outerRadius={80}
                     fill="#8884d8"
@@ -121,43 +167,43 @@ const DashboardAnalytics = () => {
                     ))}
                   </Pie>
                   <Tooltip />
-                  <Legend />
+                  <Legend verticalAlign="bottom" height={36} />
                 </PieChart>
               </ResponsiveContainer>
             </div>
           </CardContent>
         </Card>
-        
-        <Card className="col-span-1">
-          <CardHeader>
-            <CardTitle>Top Elections by Votes</CardTitle>
-            <CardDescription>Elections with the most participation</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="h-80">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart
-                  width={500}
-                  height={300}
-                  data={mockElectionData}
-                  margin={{
-                    top: 5,
-                    right: 30,
-                    left: 20,
-                    bottom: 5,
-                  }}
-                >
-                  <XAxis dataKey="name" />
-                  <YAxis />
-                  <Tooltip />
-                  <Legend />
-                  <Bar dataKey="votes" fill="#98D8EF" />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          </CardContent>
-        </Card>
       </div>
+      
+      <Card className="glass-morphism dark:glass-morphism-dark">
+        <CardHeader>
+          <CardTitle>Top Elections by Votes</CardTitle>
+          <CardDescription>Elections with the most participation</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="h-80">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart
+                width={500}
+                height={300}
+                data={mockElectionData}
+                margin={{
+                  top: 5,
+                  right: 30,
+                  left: 20,
+                  bottom: 5,
+                }}
+              >
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="votes" fill="#98D8EF" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };

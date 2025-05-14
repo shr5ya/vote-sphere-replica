@@ -12,7 +12,7 @@ import {
   TableHeader, 
   TableRow 
 } from "@/components/ui/table";
-import { Search, UserCog, Trash2 } from 'lucide-react';
+import { Search, UserCog, Trash2, UserPlus } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Badge } from "@/components/ui/badge";
 
@@ -23,6 +23,9 @@ const mockUsers = [
   { id: '3', name: 'Bob Miller', email: 'bob@example.com', role: 'user', status: 'active' },
   { id: '4', name: 'Carol Davis', email: 'carol@example.com', role: 'user', status: 'inactive' },
   { id: '5', name: 'David Wilson', email: 'david@example.com', role: 'user', status: 'active' },
+  { id: '6', name: 'Emma Thompson', email: 'emma@example.com', role: 'user', status: 'active' },
+  { id: '7', name: 'Frank Roberts', email: 'frank@example.com', role: 'user', status: 'inactive' },
+  { id: '8', name: 'Grace Lee', email: 'grace@example.com', role: 'user', status: 'active' },
 ];
 
 const UserManagement = () => {
@@ -53,105 +56,137 @@ const UserManagement = () => {
 
   return (
     <div className="space-y-6 animate-fade-in">
-      <h1 className="text-3xl font-bold">User Management</h1>
+      <div className="flex justify-between items-center">
+        <h1 className="text-3xl font-bold">User Management</h1>
+        <Button className="bg-brand-blue hover:bg-brand-blue-light text-white dark:text-white">
+          <UserPlus className="mr-2 h-4 w-4" />
+          Add New User
+        </Button>
+      </div>
       
-      <Card>
-        <CardHeader className="pb-3">
-          <CardTitle>All Users</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="flex flex-col sm:flex-row gap-4 mb-4">
-            <div className="relative flex-1">
-              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input
-                placeholder="Search users..."
-                className="pl-8"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <Card className="col-span-1 glass-morphism dark:glass-morphism-dark">
+          <CardHeader className="pb-3">
+            <CardTitle>User Stats</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div>
+              <div className="text-sm font-medium text-muted-foreground">Total Users</div>
+              <div className="text-3xl font-bold">{mockUsers.length}</div>
             </div>
-            <div className="flex gap-2">
-              <Select value={roleFilter} onValueChange={setRoleFilter}>
-                <SelectTrigger className="w-[120px]">
-                  <SelectValue placeholder="Role" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Roles</SelectItem>
-                  <SelectItem value="admin">Admin</SelectItem>
-                  <SelectItem value="user">User</SelectItem>
-                </SelectContent>
-              </Select>
-              
-              <Select value={statusFilter} onValueChange={setStatusFilter}>
-                <SelectTrigger className="w-[120px]">
-                  <SelectValue placeholder="Status" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Status</SelectItem>
-                  <SelectItem value="active">Active</SelectItem>
-                  <SelectItem value="inactive">Inactive</SelectItem>
-                </SelectContent>
-              </Select>
+            <div>
+              <div className="text-sm font-medium text-muted-foreground">Active</div>
+              <div className="text-2xl font-bold">{mockUsers.filter(u => u.status === 'active').length}</div>
             </div>
-          </div>
-          
-          <div className="rounded-md border">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Name</TableHead>
-                  <TableHead className="hidden md:table-cell">Email</TableHead>
-                  <TableHead>Role</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filteredUsers.length > 0 ? (
-                  filteredUsers.map((user) => (
-                    <TableRow key={user.id}>
-                      <TableCell className="font-medium">{user.name}</TableCell>
-                      <TableCell className="hidden md:table-cell">{user.email}</TableCell>
-                      <TableCell>
-                        {user.role === 'admin' ? (
-                          <Badge className="bg-brand-blue">Admin</Badge>
-                        ) : (
-                          <Badge variant="outline">User</Badge>
-                        )}
-                      </TableCell>
-                      <TableCell>
-                        {user.status === 'active' ? (
-                          <Badge className="bg-green-500">Active</Badge>
-                        ) : (
-                          <Badge variant="secondary">Inactive</Badge>
-                        )}
-                      </TableCell>
-                      <TableCell className="text-right">
-                        <div className="flex justify-end gap-2">
-                          <Button variant="ghost" size="icon">
-                            <UserCog className="h-4 w-4" />
-                            <span className="sr-only">Edit User</span>
-                          </Button>
-                          <Button variant="ghost" size="icon" className="text-destructive">
-                            <Trash2 className="h-4 w-4" />
-                            <span className="sr-only">Delete</span>
-                          </Button>
-                        </div>
+            <div>
+              <div className="text-sm font-medium text-muted-foreground">Inactive</div>
+              <div className="text-2xl font-bold">{mockUsers.filter(u => u.status === 'inactive').length}</div>
+            </div>
+            <div>
+              <div className="text-sm font-medium text-muted-foreground">Admins</div>
+              <div className="text-2xl font-bold">{mockUsers.filter(u => u.role === 'admin').length}</div>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card className="col-span-1 md:col-span-3 glass-morphism dark:glass-morphism-dark">
+          <CardHeader className="pb-3">
+            <CardTitle>All Users</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-col sm:flex-row gap-4 mb-4">
+              <div className="relative flex-1">
+                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                <Input
+                  placeholder="Search users..."
+                  className="pl-8"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              </div>
+              <div className="flex gap-2">
+                <Select value={roleFilter} onValueChange={setRoleFilter}>
+                  <SelectTrigger className="w-[120px]">
+                    <SelectValue placeholder="Role" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Roles</SelectItem>
+                    <SelectItem value="admin">Admin</SelectItem>
+                    <SelectItem value="user">User</SelectItem>
+                  </SelectContent>
+                </Select>
+                
+                <Select value={statusFilter} onValueChange={setStatusFilter}>
+                  <SelectTrigger className="w-[120px]">
+                    <SelectValue placeholder="Status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Status</SelectItem>
+                    <SelectItem value="active">Active</SelectItem>
+                    <SelectItem value="inactive">Inactive</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+            
+            <div className="rounded-md border">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Name</TableHead>
+                    <TableHead className="hidden md:table-cell">Email</TableHead>
+                    <TableHead>Role</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead className="text-right">Actions</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {filteredUsers.length > 0 ? (
+                    filteredUsers.map((user) => (
+                      <TableRow key={user.id}>
+                        <TableCell className="font-medium">{user.name}</TableCell>
+                        <TableCell className="hidden md:table-cell">{user.email}</TableCell>
+                        <TableCell>
+                          {user.role === 'admin' ? (
+                            <Badge className="bg-brand-blue text-white dark:text-white">Admin</Badge>
+                          ) : (
+                            <Badge variant="outline" className="border-brand-navy/30 dark:border-brand-blue/30">User</Badge>
+                          )}
+                        </TableCell>
+                        <TableCell>
+                          {user.status === 'active' ? (
+                            <Badge className="bg-green-500 text-white dark:text-white">Active</Badge>
+                          ) : (
+                            <Badge variant="secondary" className="bg-muted text-muted-foreground">Inactive</Badge>
+                          )}
+                        </TableCell>
+                        <TableCell className="text-right">
+                          <div className="flex justify-end gap-2">
+                            <Button variant="ghost" size="icon" className="text-brand-navy hover:text-brand-navy/70 dark:text-brand-blue dark:hover:text-brand-blue/70">
+                              <UserCog className="h-4 w-4" />
+                              <span className="sr-only">Edit User</span>
+                            </Button>
+                            <Button variant="ghost" size="icon" className="text-destructive hover:text-destructive/70">
+                              <Trash2 className="h-4 w-4" />
+                              <span className="sr-only">Delete</span>
+                            </Button>
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  ) : (
+                    <TableRow>
+                      <TableCell colSpan={5} className="text-center py-4">
+                        No users found
                       </TableCell>
                     </TableRow>
-                  ))
-                ) : (
-                  <TableRow>
-                    <TableCell colSpan={5} className="text-center py-4">
-                      No users found
-                    </TableCell>
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
-          </div>
-        </CardContent>
-      </Card>
+                  )}
+                </TableBody>
+              </Table>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 };
