@@ -17,14 +17,14 @@ const Header = () => {
           {isAdmin && (
             <SidebarTrigger className="md:hidden" />
           )}
-          <Link to="/" className="flex items-center gap-2">
-            <div className="bg-brand-navy dark:bg-brand-blue text-white dark:text-brand-navy p-1.5 rounded-lg">
+          <Link to="/" className="flex items-center gap-2 group">
+            <div className="bg-gradient-to-r from-brand-navy to-brand-blue dark:from-brand-blue dark:to-brand-blue-light text-white dark:text-brand-navy p-2 rounded-lg shadow-md group-hover:shadow-lg transition-all">
               <Check className="h-5 w-5" />
             </div>
-            <span className="text-2xl electra-title text-brand-navy dark:text-brand-blue">Electra</span>
+            <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-navy to-brand-blue dark:from-brand-blue dark:to-brand-blue-light transition-all group-hover:scale-105 transform">Electra</span>
           </Link>
         </div>
-        <nav className="hidden md:flex items-center gap-5">
+        <nav className="hidden md:flex items-center gap-6">
           {isAuthenticated && !isAdmin && (
             <>
               <Link to="/elections" className="text-sm font-medium hover:text-brand-navy dark:hover:text-brand-blue transition-colors">
@@ -47,16 +47,16 @@ const Header = () => {
           {isAuthenticated ? (
             <div className="flex items-center gap-4">
               <div className="hidden md:flex items-center gap-2">
-                <div className="h-8 w-8 rounded-full bg-brand-navy dark:bg-brand-blue text-white dark:text-brand-navy flex items-center justify-center">
+                <div className="h-8 w-8 rounded-full bg-gradient-to-r from-brand-navy to-brand-blue dark:from-brand-blue dark:to-brand-blue-light text-white dark:text-brand-navy flex items-center justify-center shadow-sm">
                   <User className="h-4 w-4" />
                 </div>
                 <span className="text-sm font-medium">{currentUser?.name}</span>
               </div>
               <Button 
-                variant="ghost" 
+                variant="outline" 
                 size="sm" 
                 onClick={() => logout()}
-                className="border hover:bg-brand-navy hover:text-white dark:hover:bg-brand-blue dark:hover:text-brand-navy"
+                className="border hover:bg-brand-navy hover:text-white dark:hover:bg-brand-blue dark:hover:text-brand-navy transition-all duration-300"
               >
                 <LogOut className="h-4 w-4 md:mr-2" />
                 <span className="hidden md:inline">Sign Out</span>
@@ -65,7 +65,8 @@ const Header = () => {
           ) : (
             <Button 
               onClick={() => navigate("/login")}
-              className="bg-brand-navy hover:bg-opacity-80 text-white dark:bg-brand-blue dark:text-brand-navy dark:hover:bg-opacity-80"
+              variant="brand"
+              className="hover:shadow-md transition-all duration-300"
             >
               Sign In
             </Button>

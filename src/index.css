@@ -81,6 +81,23 @@
   body {
     @apply bg-background text-foreground;
   }
+  
+  /* Ensure buttons are always visible */
+  button {
+    @apply relative overflow-hidden;
+  }
+  
+  /* Fix light theme button visibility */
+  .light button.bg-white,
+  button.bg-background {
+    @apply border border-gray-200 text-gray-800;
+  }
+  
+  /* Fix dark theme button visibility */
+  .dark button.bg-black,
+  .dark button.bg-gray-900 {
+    @apply border border-gray-700 text-gray-200;
+  }
 }
 
 /* Glassmorphism utilities */
@@ -100,6 +117,22 @@
   
   .dark .electra-title {
     background-image: linear-gradient(135deg, #4a8ec7, #98D8EF);
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-r from-brand-navy to-brand-blue bg-clip-text text-transparent;
+  }
+  
+  .dark .text-gradient {
+    @apply bg-gradient-to-r from-brand-blue to-brand-blue-light;
+  }
+  
+  .bg-gradient-brand {
+    @apply bg-gradient-to-r from-brand-navy to-brand-blue;
+  }
+  
+  .dark .bg-gradient-brand {
+    @apply bg-gradient-to-r from-brand-blue to-brand-blue-light;
   }
 }
 
@@ -153,4 +186,45 @@
 /* Add fade-in animation class */
 .animate-fade-in {
   animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* Add zoom animation */
+.animate-zoom-in {
+  animation: zoomIn 0.5s ease-out forwards;
+}
+
+@keyframes zoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Add slide animation */
+.animate-slide-in-right {
+  animation: slideInRight 0.5s ease-out forwards;
+}
+
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Hover effects */
+.hover-scale {
+  transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.03);
 }
